@@ -1,11 +1,11 @@
-const { join } = require('path');
+const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = ({ entry, name, template }) => (_, argv) => ({
   entry: ['@babel/polyfill', entry],
   output: {
     filename: join(name, 'index.js'),
-    outputPath: './dist/',
+    path: resolve(process.cwd(), 'dist'),
   },
   mode: argv.mode || 'development',
   module: {
