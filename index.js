@@ -1,7 +1,7 @@
 const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = ({ entry, name, template }) => (_, argv) => ({
+module.exports = ({ entry, name, template, favicon }) => (_, argv) => ({
   entry: ['@babel/polyfill', entry],
   output: {
     filename: join(name, 'index.js'),
@@ -51,6 +51,7 @@ module.exports = ({ entry, name, template }) => (_, argv) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template,
+      favicon,
     }),
   ],
 });
