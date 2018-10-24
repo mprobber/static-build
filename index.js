@@ -1,13 +1,11 @@
-const { resolve, join } = require('path');
+const { join } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const STATIC_DIRECTORY = resolve(__dirname, '../static');
 
 module.exports = ({ entry, name, template }) => (_, argv) => ({
   entry: ['@babel/polyfill', entry],
   output: {
     filename: join(name, 'index.js'),
-    path: resolve(STATIC_DIRECTORY, name),
+    outputPath: './dist/',
   },
   mode: argv.mode || 'development',
   module: {
