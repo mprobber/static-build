@@ -1,5 +1,7 @@
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { readFileSync } = require('fs');
+const babelrc = readFileSync(resolve(__dirname, '..', '.babelrc'));
 
 module.exports = ({ entry, name, template, favicon }) => (_, argv) => ({
   entry: ['@babel/polyfill', entry],
@@ -15,6 +17,7 @@ module.exports = ({ entry, name, template, favicon }) => (_, argv) => ({
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
+          options: { ...JSON.parse(babelrc.toString()) },
         },
       },
       {
