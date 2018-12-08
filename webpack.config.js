@@ -10,7 +10,7 @@ module.exports = packageDir => (_, argv = {}) => {
     output: {
       filename: `${name}.index.js`,
       path: resolve(packageDir, 'dist'),
-      publicPath: '/',
+      publicPath: './',
     },
     mode: argv.mode || 'development',
     resolve: {
@@ -27,7 +27,7 @@ module.exports = packageDir => (_, argv = {}) => {
           },
         },
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.(png|jpg|gif|ico)$/,
           use: [
             {
               loader: 'file-loader',
@@ -53,6 +53,10 @@ module.exports = packageDir => (_, argv = {}) => {
       port: 8080,
       historyApiFallback: true,
     },
-    plugins: [new HtmlWebpackPlugin()],
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: resolve(__dirname, './template.html'),
+      }),
+    ],
   };
 };
