@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+const { resolve } = require('path');
+const Webpack = require('webpack');
+const webpackConfig = require('../webpack.config');
+
+const directory = process.cwd();
+process.chdir(resolve(__dirname, '..'));
+Webpack(
+  webpackConfig(directory)(null, { mode: 'production' }),
+  (err, stats) => {
+    const error = err || stats.hasErrors();
+
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+
+      process.exit(-1);
+    }
+  },
+);

@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+const Webpack = require('webpack');
+const WebpackDevMiddleware = require('webpack-dev-middleware');
+const Express = require('express');
+const { resolve, basename } = require('path');
+const webpackConfig = require('../webpack.config');
+const app = Express();
+
+const directory = process.cwd();
+process.chdir(resolve(__dirname, '..'));
+
+app.use(
+  WebpackDevMiddleware(Webpack(webpackConfig(directory)()), {
+    // webpack-dev-middleware options
+  }),
+);
+
+app.listen(3000, () =>
+  // eslint-disable-next-line no-console
+  console.log(`${basename(directory)} has started on port 3000`),
+);
