@@ -8,6 +8,7 @@ module.exports = ({ entry, name, template, favicon }) => (_, argv) => ({
   output: {
     filename: `${name}.index.js`,
     path: resolve(process.cwd(), 'dist'),
+    publicPath: '/',
   },
   mode: argv.mode || 'development',
   module: {
@@ -42,6 +43,10 @@ module.exports = ({ entry, name, template, favicon }) => (_, argv) => ({
         },
       },
     ],
+  },
+  devServer: {
+    port: 8080,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
