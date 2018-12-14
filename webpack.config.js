@@ -1,7 +1,6 @@
 const { resolve, basename } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { readFileSync } = require('fs');
-const babelrc = readFileSync(resolve(__dirname, '..', '.babelrc'));
+const babelrc = require('@mprobber/config/.babelrc.json');
 
 module.exports = packageDir => (_, argv = {}) => {
   const name = basename(packageDir);
